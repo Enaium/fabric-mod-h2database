@@ -1,0 +1,15 @@
+[versions]
+h2 = "2.3.232"
+loom = "1.10-SNAPSHOT"
+minecraft = "1.21.5"
+yarn = "1.21.5+build.1"
+loader = "0.16.14"
+
+[libraries]
+h2 = { module = "com.h2database:h2", version.ref = "h2" }
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric-yarn = { module = "net.fabricmc:yarn", version.ref = "yarn" }
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "loader" }
+
+[plugins]
+loom = { id = "fabric-loom", version.ref = "loom" }
