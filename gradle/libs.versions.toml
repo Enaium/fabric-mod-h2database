@@ -4,6 +4,8 @@ loom = "1.10-SNAPSHOT"
 minecraft = "1.21.5"
 yarn = "1.21.5+build.1"
 loader = "0.16.14"
+publish = "0.8.4"
+maven = "0.34.0"
 
 [libraries]
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
@@ -13,3 +15,5 @@ fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "loader" 
 
 [plugins]
 loom = { id = "fabric-loom", version.ref = "loom" }
+publish = { id = "me.modmuss50.mod-publish-plugin", version.ref = "publish" }
+maven = { id = "com.vanniktech.maven.publish", version.ref = "maven" }
