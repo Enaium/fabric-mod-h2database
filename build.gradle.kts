@@ -1,3 +1,6 @@
+import me.modmuss50.mpp.PublishModTask
+import org.gradle.kotlin.dsl.withType
+
 plugins {
     alias(libs.plugins.loom)
     alias(libs.plugins.publish)
@@ -22,19 +25,11 @@ configurations {
     include {
         extendsFrom(includeAndExpose)
     }
-    modApi {
-        extendsFrom(includeAndExpose)
-    }
 }
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(libs.fabric.yarn) {
-        artifact {
-            classifier = "v2"
-        }
-    }
-    modImplementation(libs.fabric.loader)
+    implementation(libs.fabric.loader)
     includeAndExpose(libs.h2)
 }
 
@@ -46,7 +41,7 @@ tasks.processResources {
 }
 
 publishMods {
-    file = tasks.remapJar.get().archiveFile.get()
+    file = tasks.jar.get().archiveFile.get()
     type = STABLE
     displayName = "Fabric Database H2 ${project.version}"
     changelog = ""
@@ -56,7 +51,7 @@ publishMods {
         projectId = "1278174"
         accessToken = providers.gradleProperty("curseforge.token")
         minecraftVersionRange {
-            start = "1.0"
+            start = "1.14"
             end = "latest"
         }
     }
@@ -65,7 +60,7 @@ publishMods {
         projectId = "AWt0yK0m"
         accessToken = providers.gradleProperty("modrinth.token")
         minecraftVersionRange {
-            start = "1.0"
+            start = "1.14"
             end = "latest"
         }
     }
@@ -75,6 +70,10 @@ publishMods {
         accessToken = providers.gradleProperty("github.token")
         commitish = "master"
     }
+}
+
+tasks.withType<PublishModTask>().configureEach {
+    dependsOn(tasks.named("jar"))
 }
 
 mavenPublishing {
